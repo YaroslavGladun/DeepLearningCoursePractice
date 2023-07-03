@@ -3,7 +3,10 @@ import matplotlib.pyplot as plt
 
 
 def imshow(image: np.ndarray, title: str) -> None:
-    plt.imshow(image)
+    if len(image.shape) == 3:
+        plt.imshow(image)
+    elif len(image.shape) == 2:
+        plt.imshow(image, cmap='gray')
     plt.title(title)
     plt.show()
 
@@ -35,6 +38,26 @@ def test_solution_1_3(f) -> bool:
         if (a[-1, :] != 0).all():
             return False
     return True
+
+
+def test_solution_2_1(f) -> bool:
+    image = np.random.rand(100, 200, 3)
+    i, j, k = np.random.randint(0, 100), np.random.randint(0, 200), np.random.randint(0, 3)
+    image[i, j, k] = 2
+    return f(image) == (i, j, k)
+
+
+def test_solution_2_2(f, images_dir="./") -> bool:
+    image = np.load(images_dir + "image.npy")
+    imshow(image, "input image")
+
+    expected_image = np.load(images_dir + "gray_image.npy")
+    imshow(expected_image, "expected image")
+
+    f_image = f(image)
+    imshow(f_image, "your image")
+
+    return f_image.shape == image.shape[:-1]
 
 
 def test_solution_3_1(f) -> bool:
