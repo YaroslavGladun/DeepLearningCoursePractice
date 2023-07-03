@@ -60,6 +60,19 @@ def test_solution_2_2(f, images_dir="./") -> bool:
     return f_image.shape == image.shape[:-1]
 
 
+def test_solution_2_3(f, images_dir="./") -> bool:
+    image = np.load(images_dir + "gray_image.npy")
+    imshow(image, "input image")
+
+    expected_image = np.load(images_dir + "mask_image.npy")
+    imshow(expected_image, "expected image")
+
+    f_image = f(image)
+    imshow(f_image, "your image")
+
+    return f_image.shape == image.shape
+
+
 def test_solution_3_1(f) -> bool:
     rgb_image = np.array([
         [[255, 0, 0], [0, 255, 0], [0, 0, 255]],
