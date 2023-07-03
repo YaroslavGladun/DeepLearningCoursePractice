@@ -1,5 +1,8 @@
 import numpy as np
+import os
 import matplotlib.pyplot as plt
+
+IMAGES_DIR = "./"
 
 
 def imshow(image: np.ndarray, title: str) -> None:
@@ -54,7 +57,7 @@ def test_solution_3_1(f) -> bool:
 
 
 def test_solution_3_2(f) -> bool:
-    image = np.load("image.npy")
+    image = np.load(IMAGES_DIR + "image.npy")
     imshow(image, "input image")
 
     expected_image = image[:, ::-1, :]
@@ -67,10 +70,10 @@ def test_solution_3_2(f) -> bool:
 
 
 def test_solution_3_3(f) -> bool:
-    image = np.load("image.npy")
+    image = np.load(IMAGES_DIR + "image.npy")
     imshow(image, "input image")
 
-    expected_image = np.load("resized_image.npy")
+    expected_image = np.load(IMAGES_DIR + "resized_image.npy")
     imshow(expected_image, "expected image")
 
     f_image = f(image)
